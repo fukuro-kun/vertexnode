@@ -73,7 +73,15 @@ console.log("Umgebungsvariablen:", {
 const app = express();
 
 app.use(cors());
-app.use(express.json());
+app.use(express.json({ limit: "12mb" }));
+app.use(express.urlencoded({ limit: "12mb", extended: true }));
+
+// Längenkontroll-Middleware
+app.use((req, res, next) => {
+    let contentLength = parseInt(req.headers["content-length"], 10);
+    console.log(`Incoming request size: ${contentLength} bytes`);
+    next();
+});
 
 // Authentication middleware
 app.use((req, res, next) => {
