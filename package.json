@@ -10,7 +10,7 @@
         "start": "node server.js"
     },
     "name": "vertexnode",
-    "version": "1.2.0",
+    "version": "1.4.0",
     "main": "server.js",
     "keywords": [],
     "author": "",

@@ -272,12 +272,19 @@ Um den Container zu aktualisieren:
     ```
     git pull origin main
     ```
-2. Stoppen und entfernen Sie den alten Container:
+2. Stoppen und entfernen Sie den alten Container und wiederholen Sie die Schritte 3-5 des Deployments:
     ```
     docker stop vertexnode
     docker rm vertexnode
+    docker build --network host -t vertexnode:latest .
+    docker run -d \
+      --name vertexnode \
+      --restart always \
+      -p 3000:3000 \
+      -v $(pwd)/.env:/usr/src/app/.env \
+      -v $(pwd)/gcp-service-account-key.json:/usr/src/app/gcp-service-account-key.json \
+      vertexnode:latest
     ```
-3. Wiederholen Sie die Schritte 3-5 des Deployments.
 
 ### Hinweise
 

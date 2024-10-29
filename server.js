@@ -108,6 +108,21 @@ app.use((req, res, next) => {
     next();
 });
 
+// Neuer Endpunkt für verfügbare Modelle
+app.get("/v1/models", (req, res) => {
+    const modelList = Object.keys(MODELS).map((modelName) => ({
+        id: modelName,
+        object: "model",
+        created: Date.now(),
+        owned_by: "anthropic",
+    }));
+
+    res.json({
+        object: "list",
+        data: modelList,
+    });
+});
+
 // Messages endpoint
 app.post("/v1/messages", async (req, res) => {
     try {
