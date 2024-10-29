@@ -69,6 +69,7 @@ Der Worker benötigt mehrere Umgebungsvariablen:
 
 -   Node.js (Version 14.x oder höher)
 -   npm (normalerweise mit Node.js installiert)
+-   Git
 
 ### Schritte
 
@@ -120,9 +121,61 @@ Der Worker benötigt mehrere Umgebungsvariablen:
 
     Der Server sollte nun auf dem Port 3000 laufen (oder dem in der Umgebungsvariable PORT definierten Port).
 
+## API-Schnittstellen
+
+Der vertexnode-Server stellt folgende API-Schnittstelle bereit:
+
+### POST http://localhost:3000/v1/messages
+
+Diese Schnittstelle ermöglicht die Kommunikation mit den Claude-Modellen über Vertex AI.
+
+**Anfrage-Format:**
+
+```json
+{
+    "model": "claude-3-5-sonnet-20240620",
+    "messages": [
+        {
+            "role": "user",
+            "content": "Hallo, wie geht es dir?"
+        }
+    ],
+    "max_tokens": 1024,
+    "stream": false
+}
+```
+
+**Parameter:**
+
+-   `model`: (erforderlich) Der Name des zu verwendenden Claude-Modells.
+-   `messages`: (erforderlich) Ein Array von Nachrichten, die den Konversationsverlauf darstellen.
+-   `max_tokens`: (optional) Die maximale Anzahl von Tokens in der Antwort.
+-   `stream`: (optional) Boolean-Wert, der angibt, ob die Antwort gestreamt werden soll.
+
+**Antwort:**
+Bei Erfolg gibt die API eine JSON-Antwort mit der generierten Nachricht zurück.
+
+**Authentifizierung:**
+Alle Anfragen müssen einen gültigen API-Schlüssel im `x-api-key` Header enthalten.
+
+**Verfügbare Modelle:**
+
+-   claude-3-opus
+-   claude-3-sonnet
+-   claude-3-haiku
+-   claude-3-5-sonnet
+-   claude-3-opus-20240229
+-   claude-3-sonnet-20240229
+-   claude-3-haiku-20240307
+-   claude-3-5-sonnet-20240620
+-   claude-3-5-sonnet-v2
+
+Bitte beachten Sie die spezifischen Eigenschaften und Einschränkungen jedes Modells bei der Verwendung.
+
 ### Hinweise
 
 -   Stellen Sie sicher, dass Sie die nötigen Berechtigungen und Zugänge für Google Cloud Platform und Vertex AI eingerichtet haben, wie im Abschnitt "Voraussetzungen" beschrieben.
+-   Die URL `http://localhost:3000` gilt für lokale Entwicklungsumgebungen. In Produktionsumgebungen sollte die entsprechende Server-URL verwendet werden.
 
 ## Unterstützung und Wartung
 
