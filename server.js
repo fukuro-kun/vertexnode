@@ -23,7 +23,7 @@ const fetch = require("node-fetch");
 const { getGoogleAccessToken } = require("./auth");
 
 const API_KEY = process.env.API_KEY || "dein-api-key";
-const PROJECT = process.env.PROJECT || "tribal-bonsai-440016-n7";
+const PROJECT = process.env.PROJECT || "dein-projekt";
 
 // MODELS Definition hinzugefügt
 const MODELS = {
