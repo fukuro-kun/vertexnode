@@ -81,7 +81,7 @@ Der Worker benötigt mehrere Umgebungsvariablen:
     Klonen Sie das Repository auf Ihren lokalen Computer:
 
     ```
-    git clone https://github.com/ihr-benutzername/vertexnode.git
+    git clone https://github.com/fukuro-kun/vertexnode.git
     cd vertexnode
     ```
 
