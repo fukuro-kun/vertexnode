@@ -25,6 +25,13 @@ const { getGoogleAccessToken } = require("./auth");
 const API_KEY = process.env.API_KEY || "dein-api-key";
 const PROJECT = process.env.PROJECT || "dein-projekt";
 
+// Überprüfung, ob Crypto API verfügbar ist
+if (typeof crypto !== "undefined" && crypto.subtle) {
+    console.log("Web Crypto API ist verfügbar");
+} else {
+    console.log("Web Crypto API ist nicht verfügbar");
+}
+
 // MODELS Definition hinzugefügt
 const MODELS = {
     "claude-3-opus": {

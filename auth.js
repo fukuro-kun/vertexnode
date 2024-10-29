@@ -19,7 +19,8 @@
 const fs = require("fs");
 const path = require("path");
 const fetch = require("node-fetch");
-const crypto = require("crypto").webcrypto;
+const { webcrypto } = require("node:crypto");
+const { subtle } = webcrypto;
 
 // Funktion zum Lesen der service_account.json-Datei
 function getServiceAccountInfo() {

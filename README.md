@@ -198,6 +198,87 @@ Bitte beachten Sie die spezifischen Eigenschaften und Einschränkungen jedes Mod
 -   Stellen Sie sicher, dass Sie die nötigen Berechtigungen und Zugänge für Google Cloud Platform und Vertex AI eingerichtet haben, wie im Abschnitt "Voraussetzungen" beschrieben.
 -   Die URL `http://localhost:3000` gilt für lokale Entwicklungsumgebungen. In Produktionsumgebungen sollte die entsprechende Server-URL verwendet werden.
 
+## Docker-Deployment
+
+![Docker](https://img.shields.io/badge/Docker-Ready-blue?logo=docker)
+![Deployment Method](https://img.shields.io/badge/Deployment-Docker-informational?logo=docker)
+![Node Version](https://img.shields.io/badge/Node-20.9.0-brightgreen?logo=node.js)
+
+Für ein einfaches Deployment in einer Docker-Umgebung folgen Sie diesen Schritten:
+
+### Voraussetzungen
+
+-   Docker installiert auf Ihrem System
+-   Git installiert auf Ihrem System
+-   Zugang zu einem Terminal/Kommandozeile
+
+### Schritte zum Deployment
+
+1. **Projekt klonen**
+
+    ```
+    git clone https://github.com/fukuro-kun/vertexnode.git
+    cd vertexnode
+    ```
+
+2. **Konfiguration vorbereiten**
+
+    - Kopieren Sie Ihre `gcp-service-account-key.json` in das Projektverzeichnis.
+    - Erstellen Sie eine `.env` Datei im Projektverzeichnis mit folgendem Inhalt:
+        ```
+        API_KEY=Ihr_API_Schlüssel
+        PROJECT=Ihre_GCP_Projekt_ID
+        ```
+
+3. **Docker-Image bauen**
+
+    ```
+    docker build --network host -t vertexnode:latest .
+    ```
+
+4. **Docker-Container starten**
+
+    ```
+    docker run -d \
+      --name vertexnode \
+      -p 3000:3000 \
+      -v $(pwd)/.env:/usr/src/app/.env \
+      -v $(pwd)/gcp-service-account-key.json:/usr/src/app/gcp-service-account.key.json \
+      vertexnode:latest
+    ```
+
+5. **Überprüfen der Installation**
+
+    ```
+    docker logs vertexnode
+    ```
+
+    Sie sollten eine Ausgabe sehen, die bestätigt, dass der Server läuft und das Web Crypto API verfügbar ist.
+
+6. **Testen der API**
+   Verwenden Sie den curl-Befehl aus dem API-Schnittstellen-Abschnitt, um die Funktionalität zu testen.
+
+### Wartung und Updates
+
+Um den Container zu aktualisieren:
+
+1. Ziehen Sie die neuesten Änderungen aus dem Repository:
+    ```
+    git pull origin main
+    ```
+2. Stoppen und entfernen Sie den alten Container:
+    ```
+    docker stop vertexnode
+    docker rm vertexnode
+    ```
+3. Wiederholen Sie die Schritte 3-5 des Deployments.
+
+### Hinweise
+
+-   Stellen Sie sicher, dass Ports nicht bereits belegt sind.
+-   Passen Sie den Port in Schritt 4 an, falls 3000 bereits verwendet wird.
+-   Für Produktionsumgebungen sollten zusätzliche Sicherheitsmaßnahmen getroffen werden.
+
 ## Unterstützung und Wartung
 
 Dieses Projekt wird passiv gewartet. Bitte beachten Sie folgende Hinweise:

@@ -2,3 +2,7 @@
 *-[0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f].json
 gcp-service-account-key.json
 node_modules/
+
+# Dockerfile und Docker-related
+Dockerfile
+.dockerignore
