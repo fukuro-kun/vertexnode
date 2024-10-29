@@ -76,7 +76,7 @@ app.use(cors());
 app.use(express.json({ limit: "12mb" }));
 app.use(express.urlencoded({ limit: "12mb", extended: true }));
 
-// Längenkontroll-Middleware
+// Längenkontroll Middleware
 app.use((req, res, next) => {
     let contentLength = parseInt(req.headers["content-length"], 10);
     console.log(`Incoming request size: ${contentLength} bytes`);
