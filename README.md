@@ -129,6 +129,27 @@ Der vertexnode-Server stellt folgende API-Schnittstelle bereit:
 
 Diese Schnittstelle ermöglicht die Kommunikation mit den Claude-Modellen über Vertex AI.
 
+#### Beispielanfrage mit cURL
+
+```bash
+curl -X POST http://localhost:3000/v1/messages \
+  -H "Content-Type: application/json" \
+  -H "x-api-key: dein-api-key" \
+  -d '{
+    "model": "claude-3-5-sonnet-20240620",
+    "messages": [
+      {
+        "role": "user",
+        "content": "Hallo, wie geht es dir?"
+      }
+    ],
+    "max_tokens": 1024,
+    "stream": false
+  }'
+```
+
+Ersetzen Sie `dein-api-key` durch Ihren tatsächlichen API-Schlüssel.
+
 **Anfrage-Format:**
 
 ```json
