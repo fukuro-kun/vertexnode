@@ -243,9 +243,15 @@ Für ein einfaches Deployment in einer Docker-Umgebung folgen Sie diesen Schritt
       --name vertexnode \
       -p 3000:3000 \
       -v $(pwd)/.env:/usr/src/app/.env \
-      -v $(pwd)/gcp-service-account-key.json:/usr/src/app/gcp-service-account.key.json \
+      -v $(pwd)/gcp-service-account-key.json:/usr/src/app/gcp-service-account-key.json \
       vertexnode:latest
     ```
+
+    Soll der Server automatisch neu starten, so fügt man hier die Option `--restart always` hinzu. Z. B. wenn:
+
+    - Der Docker-Daemon neu gestartet wird
+    - Der Container aus irgendeinem Grund abstürzt
+    - Der Host-Server neu gestartet wird
 
 5. **Überprüfen der Installation**
 
